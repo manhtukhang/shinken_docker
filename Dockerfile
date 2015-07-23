@@ -81,7 +81,7 @@ ADD         src/config/thruk/thruk_local.conf /etc/thruk/thruk_local.conf
 ADD         src/config/supervisor/conf.d /etc/supervisor/conf.d
 ADD         src/config/pnp4nagios/config_local.php /usr/local/pnp4nagios/etc/config_local.php
 ADD         src/config/pnp4nagios/pnp4nagios.conf /etc/apache2/conf-available/pnp4nagios.conf
-RUN         ln -s /etc/apache2/conf-available/pnp4nagios.conf /etc/apache2/conf-enable/pnp4nagios.conf
+RUN         ln -s /etc/apache2/conf-available/pnp4nagios.conf /etc/apache2/conf-enabled/pnp4nagios.conf
 
 #VOLUME     ["/mnt", "/mnt"]
     
