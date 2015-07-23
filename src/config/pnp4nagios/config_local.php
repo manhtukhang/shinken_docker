@@ -162,7 +162,7 @@ $conf['popup-width'] = "600px";
 # jQuery UI Theme
 # http://jqueryui.com/themeroller/
 # Possible values are: lightness, smoothness, redmond, multisite
-$conf['ui-theme'] = 'lightness';
+$conf['ui-theme'] = 'multisite';
 
 # Language definitions to use.
 # valid options are en_US, de_DE, es_ES, ru_RU, fr_FR 
