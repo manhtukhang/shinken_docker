@@ -70,7 +70,7 @@ RUN			shinken --init && \
 ADD         src/config/shinken/shinken.cfg /etc/shinken/shinken.cfg
 ADD         src/config/shinken/broker-master.cfg /etc/shinken/brokers/broker-master.cfg
 ADD			src/config/shinken/livestatus.cfg /etc/shinken/modules/livestatus.cfg
-ADD			/home/manhtuvjp/temp/shinken_docker/src/config/thruk/thruk_local.conf /etc/thruk/thruk_local.conf
+ADD			src/config/thruk/thruk_local.conf /etc/thruk/thruk_local.conf
 ADD         src/config/supervisor/conf.d/* /etc/supervisor/conf.d/
 ADD			src/config/pnp4nagios/config_local.php /usr/local/pnp4nagios/etc/config_local.php
 ADD			src/config/pnp4nagios/pnp4nagios.conf /etc/apache2/conf-available/pnp4nagios.conf
