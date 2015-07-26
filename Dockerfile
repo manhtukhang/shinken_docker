@@ -30,8 +30,9 @@ RUN         apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3E5C1192 &&
             php5-cli \
             php5-gd \
             libapache2-mod-php5 \
-            thruk && \
+            thruk \
 
+            snmp \
             libnet-snmp-perl \
             libswitch-perl \
             liblist-compare-perl && \
