@@ -31,6 +31,10 @@ RUN         apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3E5C1192 &&
             php5-gd \
             libapache2-mod-php5 \
             thruk && \
+
+            libnet-snmp-perl && \
+            libswitch-perl && \
+            liblist-compare-perl && \
             
             apt-get autoremove --purge -y && \
             apt-get autoclean -y && \
@@ -73,15 +77,23 @@ RUN         shinken --init && \
             shinken install logstore-sqlite && \
             shinken shinken install livestatus && \
             shinken shinken install simple-log
-            
-ADD         src/config/shinken/shinken.cfg /etc/shinken/shinken.cfg
-ADD         src/config/shinken/broker-master.cfg /etc/shinken/brokers/broker-master.cfg
-ADD         src/config/shinken/livestatus.cfg /etc/shinken/modules/livestatus.cfg
-ADD         src/config/thruk/thruk_local.conf /etc/thruk/thruk_local.conf
-ADD         src/config/supervisor/conf.d /etc/supervisor/conf.d
-ADD         src/config/pnp4nagios/config_local.php /usr/local/pnp4nagios/etc/config_local.php
-ADD         src/config/pnp4nagios/pnp4nagios.conf /etc/apache2/conf-available/pnp4nagios.conf
-RUN         ln -s /etc/apache2/conf-available/pnp4nagios.conf /etc/apache2/conf-enabled/pnp4nagios.conf
+
+ADD         src/config/tools/check_fortigate_disk.bash        /usr/local/libexec/check_fortigate_disk.bash
+ADD         src/config/tools/check_snmp_traffic.bash          /usr/local/libexec/check_snmp_traffic.bash
+ADD         src/config/tools/check_fortigate.pl               /usr/local/libexec/check_fortigate.pl
+ADD         src/config/tools/check_nwc_health.pl              /usr/local/libexec/check_nwc_health.pl 
+ADD         src/config/tools/check_snmp_load.pl               /usr/local/libexec/check_snmp_load.pl       
+ADD         src/config/tools/check_snmp_mem.pl                /usr/local/libexec/check_snmp_mem.pl        
+ADD         src/config/tools/check_snmp_storage.pl            /usr/local/libexec/check_snmp_storage.pl
+ADD         src/config/shinken/shinken.cfg                    /etc/shinken/shinken.cfg
+ADD         src/config/shinken/broker-master.cfg              /etc/shinken/brokers/broker-master.cfg
+ADD         src/config/shinken/livestatus.cfg                 /etc/shinken/modules/livestatus.cfg
+ADD         src/config/thruk/thruk_local.conf                 /etc/thruk/thruk_local.conf
+ADD         src/config/supervisor/conf.d                      /etc/supervisor/conf.d
+ADD         src/config/pnp4nagios/config_local.php            /usr/local/pnp4nagios/etc/config_local.php
+ADD         src/config/pnp4nagios/pnp4nagios.conf             /etc/apache2/conf-available/pnp4nagios.conf
+RUN         ln -s /etc/apache2/conf-available/pnp4nagios.conf /etc/apache2/conf-enabled/pnp4nagios.conf && \
+            mkdir -p /etc/skconf
 
 #VOLUME     ["/mnt", "/mnt"]
     
