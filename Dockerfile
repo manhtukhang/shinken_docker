@@ -32,8 +32,8 @@ RUN         apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3E5C1192 &&
             libapache2-mod-php5 \
             thruk && \
 
-            libnet-snmp-perl && \
-            libswitch-perl && \
+            libnet-snmp-perl \
+            libswitch-perl \
             liblist-compare-perl && \
             
             apt-get autoremove --purge -y && \
