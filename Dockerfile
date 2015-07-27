@@ -30,6 +30,7 @@ RUN         apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3E5C1192 &&
             php5-cli \
             php5-gd \
             libapache2-mod-php5 \
+            apache2-utils \
             thruk \
 
             snmp \
@@ -40,7 +41,6 @@ RUN         apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3E5C1192 &&
             apt-get autoremove --purge -y && \
             apt-get autoclean -y && \
             apt-get clean -y
-            
 
 RUN         wget https://github.com/naparuba/shinken/archive/2.4.1.tar.gz && \
             wget https://github.com/lingej/pnp4nagios/archive/0.6.25.tar.gz && \
@@ -95,9 +95,6 @@ ADD         src/config/pnp4nagios/config_local.php            /usr/local/pnp4nag
 ADD         src/config/pnp4nagios/pnp4nagios.conf             /etc/apache2/conf-available/pnp4nagios.conf
 RUN         ln -s /etc/apache2/conf-available/pnp4nagios.conf /etc/apache2/conf-enabled/pnp4nagios.conf && \
             mkdir -p /etc/skconf
+RUN         echo "www-data ALL=(ALL:ALL) NOPASSWD:/etc/init.d/shinken" >> /etc/sudoers
 
-#VOLUME     ["/mnt", "/mnt"]
-    
-
-CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-n"]
-
+CMD         ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-n"]

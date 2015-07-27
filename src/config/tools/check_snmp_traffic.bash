@@ -26,7 +26,7 @@ function getTraffic () {
 	delta_traffic_in=$(echo "$traffic_data_in1 $traffic_data_in2" | awk '{print ($2-$1)}')
 	delta_traffic_out=$(echo "$traffic_data_out1 $traffic_data_out2" | awk '{print ($2-$1)}')
 	delta_time=$(echo "$time1 $time2" | awk '{print ($2-$1)/100}')
-	if_speed=$(echo $data_t1 | awk '{print ($12/1000000)}')
+	if_speed=$(echo $data_t1 | awk '{speed=($12/1000000); if(speed == 0){print 100} else {print speed}}')
 
 	if ( [ -z "$(echo $data_t1 | grep up )" ] && [ $delta_traffic_in == 0 ] && [ $delta_traffic_out == 0 ] ); then
 		 echo -e "WARNING - Port is DOWN";
