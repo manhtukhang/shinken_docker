@@ -1,4 +1,4 @@
-FROM        ubuntu:trusty
+FROM        phusion/baseimage:latest
 MAINTAINER  MT
 
 ENV         DEBIAN_FRONTEND noninteractive
