@@ -1,4 +1,4 @@
-FROM        ubuntu:trusty
+FROM        phusion/baseimage:latest
 MAINTAINER  MT
 
 ENV         DEBIAN_FRONTEND noninteractive
@@ -17,9 +17,9 @@ RUN         apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3E5C1192 &&
             echo 'deb http://labs.consol.de/repo/stable/ubuntu trusty main' >> /etc/apt/sources.list && \
         
             apt-get update && \
-            apt-get upgrade -y && \
+            apt-get upgrade -y --no-install-recommends && \
             
-            apt-get install -y build-essential \
+            apt-get install -y --no-install-recommends build-essential \
             wget \
             supervisor \
             python-setuptools \
@@ -41,6 +41,7 @@ RUN         apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3E5C1192 &&
             apt-get autoremove --purge -y && \
             apt-get autoclean -y && \
             apt-get clean -y
+            
 
 RUN         wget https://github.com/naparuba/shinken/archive/2.4.1.tar.gz && \
             wget https://github.com/lingej/pnp4nagios/archive/0.6.25.tar.gz && \
@@ -91,6 +92,7 @@ ADD         src/config/shinken/broker-master.cfg              /etc/shinken/broke
 ADD         src/config/shinken/livestatus.cfg                 /etc/shinken/modules/livestatus.cfg
 ADD         src/config/thruk/thruk_local.conf                 /etc/thruk/thruk_local.conf
 ADD         src/config/supervisor/conf.d                      /etc/supervisor/conf.d
+ADD         src/config/apache2/apache2.conf                   /etc/apache2/apache2.conf
 ADD         src/config/pnp4nagios/config_local.php            /usr/local/pnp4nagios/etc/config_local.php
 ADD         src/config/pnp4nagios/pnp4nagios.conf             /etc/apache2/conf-available/pnp4nagios.conf
 RUN         ln -s /etc/apache2/conf-available/pnp4nagios.conf /etc/apache2/conf-enabled/pnp4nagios.conf && \
