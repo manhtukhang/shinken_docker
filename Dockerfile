@@ -96,6 +96,7 @@ ADD         src/config/apache2/apache2.conf                   /etc/apache2/apach
 ADD         src/config/pnp4nagios/config_local.php            /usr/local/pnp4nagios/etc/config_local.php
 ADD         src/config/pnp4nagios/pnp4nagios.conf             /etc/apache2/conf-available/pnp4nagios.conf
 RUN         ln -s /etc/apache2/conf-available/pnp4nagios.conf /etc/apache2/conf-enabled/pnp4nagios.conf && \
+ADD         src/config/shinken/paths.cfg                      /etc/shinken/resource.d/paths.cfg
             mkdir -p /etc/skconf
 RUN         echo "www-data ALL=(ALL:ALL) NOPASSWD:/etc/init.d/shinken" >> /etc/sudoers
 
