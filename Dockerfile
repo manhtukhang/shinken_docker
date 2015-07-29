@@ -43,9 +43,9 @@ RUN         apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3E5C1192 &&
             apt-get clean -y
             
 
-RUN         wget https://github.com/naparuba/shinken/archive/2.4.1.tar.gz && \
-            wget https://github.com/lingej/pnp4nagios/archive/0.6.25.tar.gz && \
-            wget https://www.monitoring-plugins.org/download/monitoring-plugins-2.1.1.tar.gz && \
+RUN         wget --no-check-certificate https://github.com/naparuba/shinken/archive/2.4.1.tar.gz && \
+            wget --no-check-certificate https://github.com/lingej/pnp4nagios/archive/0.6.25.tar.gz && \
+            wget --no-check-certificate https://www.monitoring-plugins.org/download/monitoring-plugins-2.1.1.tar.gz && \
             
             tar -xvzf 2.4.1.tar.gz && \
             tar -xvzf 0.6.25.tar.gz && \
@@ -90,6 +90,8 @@ ADD         src/config/tools/check_snmp_storage.pl            /usr/local/libexec
 ADD         src/config/shinken/shinken.cfg                    /etc/shinken/shinken.cfg
 ADD         src/config/shinken/broker-master.cfg              /etc/shinken/brokers/broker-master.cfg
 ADD         src/config/shinken/livestatus.cfg                 /etc/shinken/modules/livestatus.cfg
+ADD         src/config/shinken/reload-shinken.cfg             /etc/shinken/commands/reload-shinken.cfg
+ADD         src/config/shinken/restart-shinken.cfg            /etc/shinken/commands/restart-shinken.cfg
 ADD         src/config/thruk/thruk_local.conf                 /etc/thruk/thruk_local.conf
 ADD         src/config/supervisor/conf.d                      /etc/supervisor/conf.d
 ADD         src/config/apache2/apache2.conf                   /etc/apache2/apache2.conf
